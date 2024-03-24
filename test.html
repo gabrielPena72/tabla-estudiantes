@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table Overwrite with Input Fields</title>
+<script>
+function overwriteTable(tableId) {
+    var table = document.getElementById(tableId);
+    if (!table) {
+        console.error("Table with id " + tableId + " not found.");
+        return;
+    }
+
+    // Clear existing rows
+    while (table.rows.length > 0) {
+        table.deleteRow(0);
+    }
+
+    // Add headers
+    var headerRow = table.insertRow(0);
+    for (var i = 0; i < 3; i++) {
+        var headerCell = headerRow.insertCell();
+        headerCell.textContent = document.getElementById('header' + i).value;
+    }
+
+    // Add data rows
+    var row = table.insertRow();
+    for (var i = 0; i < 3; i++) {
+        var cell = row.insertCell();
+        cell.textContent = document.getElementById('data' + i).value;
+    }
+}
+</script>
+</head>
+<body>
+
+<table id="myTable">
+    <!-- Table content will be dynamically generated here -->
+</table>
+
+<div>
+    <label for="header0">Header 1:</label>
+    <input type="text" id="header0"><br>
+    <label for="header1">Header 2:</label>
+    <input type="text" id="header1"><br>
+    <label for="header2">Header 3:</label>
+    <input type="text" id="header2"><br>
+</div>
+
+<div>
+    <label for="data0">Data 1:</label>
+    <input type="text" id="data0"><br>
+    <label for="data1">Data 2:</label>
+    <input type="text" id="data1"><br>
+    <label for="data2">Data 3:</label>
+    <input type="text" id="data2"><br>
+</div>
+
+<button onclick="overwriteTable('myTable')">
+    Overwrite Table
+</button>
+
+</body>
+</html>
